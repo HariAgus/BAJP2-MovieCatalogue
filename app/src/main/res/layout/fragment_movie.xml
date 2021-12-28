@@ -11,6 +11,9 @@
         android:id="@+id/rvMovie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/dimen_6dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:spanCount="2"
         tools:listitem="@layout/item_list" />

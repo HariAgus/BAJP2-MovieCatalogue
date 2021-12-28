@@ -6,6 +6,7 @@ object Const {
     const val URL_MOVIE = "movie"
     const val URL_TV_SHOW = "tv"
 
-    const val DELAY_MOVE = 2000L
+    // SPLASH SCREEN
+    const val DELAY_SPLASH_SCREEN = 2000L
 
 }

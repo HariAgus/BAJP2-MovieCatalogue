@@ -6,7 +6,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.hariagus.submission2bajp.databinding.ActivitySplashScreenBinding
 import com.hariagus.submission2bajp.ui.home.HomeActivity
-import com.hariagus.submission2bajp.utils.Const.DELAY_MOVE
+import com.hariagus.submission2bajp.utils.Const.DELAY_SPLASH_SCREEN
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -20,6 +20,6 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler(mainLooper).postDelayed({
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
-        }, DELAY_MOVE)
+        }, DELAY_SPLASH_SCREEN)
     }
 }

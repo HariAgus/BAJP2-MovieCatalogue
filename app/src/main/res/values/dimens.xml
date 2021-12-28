@@ -41,4 +41,6 @@
     <dimen name="spacing">9dp</dimen>
     <dimen name="dividerHeight">8dp</dimen>
     <dimen name="icon_width_height">30dp</dimen>
+    <dimen name="dimen_6dp">6dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
 </resources>
