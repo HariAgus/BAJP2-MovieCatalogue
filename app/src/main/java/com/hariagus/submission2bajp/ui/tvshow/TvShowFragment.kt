@@ -1,5 +1,6 @@
 package com.hariagus.submission2bajp.ui.tvshow
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +17,12 @@ class TvShowFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,8 +34,10 @@ class TvShowFragment : Fragment() {
             binding.progressSpinKitList.visibility = View.VISIBLE
             viewModel.getTvShow().observe(this, { tvShow ->
                 binding.progressSpinKitList.visibility = View.GONE
-                tvShowAdapter.setTvShow(tvShow)
-                tvShowAdapter.notifyDataSetChanged()
+                tvShowAdapter.apply {
+                    setTvShow(tvShow)
+                    notifyDataSetChanged()
+                }
             })
 
             with(binding.rvTvShow) {

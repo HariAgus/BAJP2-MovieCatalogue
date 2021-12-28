@@ -1,8 +1,11 @@
 package com.hariagus.submission2bajp.utils
 
-class Const {
+object Const {
 
-    companion object {
-        const val DELAY_MOVE = 2000L
-    }
+    // URL
+    const val URL_MOVIE = "movie"
+    const val URL_TV_SHOW = "tv"
+
+    const val DELAY_MOVE = 2000L
+
 }
