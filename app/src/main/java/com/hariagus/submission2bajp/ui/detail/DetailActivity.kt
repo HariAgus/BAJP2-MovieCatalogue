@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
 import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
 import com.hariagus.submission2bajp.databinding.ActivityDetailBinding
+import com.hariagus.submission2bajp.utils.loadImageGlide
 import com.hariagus.submission2bajp.viewmodel.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
@@ -63,20 +63,18 @@ class DetailActivity : AppCompatActivity() {
             tvOverviewDetail.text = movieEntity.overview
             tvReleaseDate.text = movieEntity.releaseDate
             tvScoreDetail.text = movieEntity.voteAverage.toString()
-
-            /**
-             * Poster Detail
-             */
-            Glide.with(this@DetailActivity)
-                .load(this@DetailActivity.getString(R.string.url_poster, movieEntity.posterPath))
-                .into(roundedPosterDetail)
-
-            /**
-             * Background Detail
-             */
-            Glide.with(this@DetailActivity)
-                .load(this@DetailActivity.getString(R.string.url_poster, movieEntity.backdropPath))
-                .into(posterBg)
+            loadImageGlide(
+                this@DetailActivity.getString(
+                    R.string.url_poster, movieEntity.posterPath
+                ),
+                roundedPosterDetail
+            )
+            loadImageGlide(
+                this@DetailActivity.getString(
+                    R.string.url_poster, movieEntity.backdropPath
+                ),
+                posterBg
+            )
         }
     }
 
@@ -88,20 +86,18 @@ class DetailActivity : AppCompatActivity() {
             tvOverviewDetail.text = tvShowEntity.overview
             tvReleaseDate.text = tvShowEntity.firstAirDate
             tvScoreDetail.text = tvShowEntity.voteAverage.toString()
-
-            /**
-             * Poster Detail
-             */
-            Glide.with(this@DetailActivity)
-                .load(this@DetailActivity.getString(R.string.url_poster, tvShowEntity.posterPath))
-                .into(roundedPosterDetail)
-
-            /**
-             * Background Detail
-             */
-            Glide.with(this@DetailActivity)
-                .load(this@DetailActivity.getString(R.string.url_poster, tvShowEntity.backdropPath))
-                .into(posterBg)
+            loadImageGlide(
+                this@DetailActivity.getString(
+                    R.string.url_poster, tvShowEntity.posterPath
+                ),
+                roundedPosterDetail
+            )
+            loadImageGlide(
+                this@DetailActivity.getString(
+                    R.string.url_poster, tvShowEntity.backdropPath
+                ),
+                posterBg
+            )
         }
     }
 }

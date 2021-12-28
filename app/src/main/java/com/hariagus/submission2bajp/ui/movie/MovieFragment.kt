@@ -1,5 +1,6 @@
 package com.hariagus.submission2bajp.ui.movie
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ class MovieFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,8 +34,10 @@ class MovieFragment : Fragment() {
             binding.progressSpinKitList.visibility = View.VISIBLE
             viewModel.getMovies().observe(this, { movies ->
                 binding.progressSpinKitList.visibility = View.GONE
-                movieAdapter.setMovies(movies)
-                movieAdapter.notifyDataSetChanged()
+                movieAdapter.apply {
+                    setMovies(movies)
+                    notifyDataSetChanged()
+                }
             })
 
             with(binding.rvMovie) {
