@@ -7,7 +7,8 @@ import com.hariagus.submission2bajp.data.source.MovieRepository
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
 import com.hariagus.submission2bajp.utils.DataDummyMovies
 import com.nhaarman.mockitokotlin2.verify
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

@@ -10,7 +10,7 @@ import com.hariagus.submission2bajp.databinding.ItemListBinding
 import com.hariagus.submission2bajp.ui.detail.DetailActivity
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYPE
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
-import com.hariagus.submission2bajp.ui.detail.TypeDetail
+import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -54,7 +54,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                    putExtra(EXTRA_TYPE, TypeDetail.MOVIE.ordinal)
+                    putExtra(EXTRA_TYPE, TypeCatalogue.MOVIE.ordinal)
                     putExtra(ID_DATA, movieEntity.id)
                 }
                 itemView.context.startActivity(intent)

@@ -1,5 +1,6 @@
 package com.hariagus.submission2bajp.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +9,7 @@ import com.hariagus.submission2bajp.databinding.ActivitySplashScreenBinding
 import com.hariagus.submission2bajp.ui.home.HomeActivity
 import com.hariagus.submission2bajp.utils.Const.DELAY_SPLASH_SCREEN
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding

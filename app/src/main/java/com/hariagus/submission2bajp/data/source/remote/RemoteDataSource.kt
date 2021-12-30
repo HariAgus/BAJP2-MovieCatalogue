@@ -15,14 +15,6 @@ class RemoteDataSource {
 
     companion object {
         private val TAG: String = RemoteDataSource::class.java.simpleName
-
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource()
-            }
     }
 
     fun getMovies(callback: LoadMovieCallback) {
