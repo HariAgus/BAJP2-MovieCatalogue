@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.hariagus.submission2bajp.databinding.FragmentTvShowBinding
-import com.hariagus.submission2bajp.viewmodel.ViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvShowFragment : Fragment() {
 
     private lateinit var binding: FragmentTvShowBinding
+    private val viewModel: TvShowViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +27,10 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
             val tvShowAdapter = TvShowAdapter()
 
             binding.progressSpinKitList.visibility = View.VISIBLE
-            viewModel.getTvShow().observe(this, { tvShow ->
+            viewModel.getTvShow().observe(requireActivity(), { tvShow ->
                 binding.progressSpinKitList.visibility = View.GONE
                 tvShowAdapter.apply {
                     setTvShow(tvShow)

@@ -10,7 +10,7 @@ import com.hariagus.submission2bajp.databinding.ItemListBinding
 import com.hariagus.submission2bajp.ui.detail.DetailActivity
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYPE
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
-import com.hariagus.submission2bajp.ui.detail.TypeDetail
+import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
@@ -55,7 +55,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                    putExtra(EXTRA_TYPE, TypeDetail.TV_SHOW.ordinal)
+                    putExtra(EXTRA_TYPE, TypeCatalogue.TV_SHOW.ordinal)
                     putExtra(ID_DATA, tvShow.id)
                 }
                 itemView.context.startActivity(intent)

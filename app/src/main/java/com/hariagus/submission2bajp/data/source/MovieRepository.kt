@@ -8,19 +8,9 @@ import com.hariagus.submission2bajp.data.source.remote.RemoteDataSource
 import com.hariagus.submission2bajp.data.source.remote.response.MovieItem
 import com.hariagus.submission2bajp.data.source.remote.response.TvShowItem
 
-class MovieRepository private constructor(
+class MovieRepository(
     private val remoteDataSource: RemoteDataSource
 ) : MovieDataSource {
-
-    companion object {
-        @Volatile
-        private var instance: MovieRepository? = null
-
-        fun getInstance(dataSource: RemoteDataSource): MovieRepository =
-            instance ?: synchronized(this) {
-                instance ?: MovieRepository(dataSource)
-            }
-    }
 
     override fun getAllMovies(): LiveData<List<MovieEntity>> {
         val movieResult = MutableLiveData<List<MovieEntity>>()
