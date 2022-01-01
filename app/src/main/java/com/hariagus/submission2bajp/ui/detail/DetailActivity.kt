@@ -1,13 +1,14 @@
 package com.hariagus.submission2bajp.ui.detail
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
 import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
 import com.hariagus.submission2bajp.databinding.ActivityDetailBinding
 import com.hariagus.submission2bajp.utils.loadImageGlide
+import com.hariagus.submission2bajp.utils.viewGone
+import com.hariagus.submission2bajp.utils.viewVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
@@ -24,27 +25,36 @@ class DetailActivity : AppCompatActivity() {
         val typeEnum: TypeCatalogue = TypeCatalogue.values()[type]
         val id = intent.getIntExtra(ID_DATA, -1)
 
-        binding.svLoadingDetail.visibility = View.VISIBLE
-        binding.nestedScroll.visibility = View.GONE
+        binding.apply {
+            svLoadingDetail.viewVisible()
+            nestedScroll.viewGone()
+        }
+        binding.svLoadingDetail.viewVisible()
+        binding.nestedScroll.viewGone()
         when (typeEnum) {
             TypeCatalogue.MOVIE -> {
                 viewModel.setSelectedMovie(id.toString())
                 viewModel.getMovie().observe(this, { movie ->
-                    binding.svLoadingDetail.visibility = View.GONE
-                    binding.nestedScroll.visibility = View.VISIBLE
+                    stateDataVisible()
                     loadDataMovie(movie)
                 })
             }
             TypeCatalogue.TV_SHOW -> {
                 viewModel.setSelectedTvShow(id.toString())
                 viewModel.getTvShow().observe(this, { tvShow ->
-                    binding.svLoadingDetail.visibility = View.GONE
-                    binding.nestedScroll.visibility = View.VISIBLE
+                    stateDataVisible()
                     loadDataTvShow(tvShow)
                 })
             }
         }
 
+    }
+
+    private fun stateDataVisible() {
+        binding.apply {
+            svLoadingDetail.viewGone()
+            nestedScroll.viewVisible()
+        }
     }
 
     private fun loadDataMovie(movieEntity: MovieEntity) {

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hariagus.submission2bajp.databinding.FragmentTvShowBinding
+import com.hariagus.submission2bajp.utils.viewGone
+import com.hariagus.submission2bajp.utils.viewVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvShowFragment : Fragment() {
@@ -18,7 +20,9 @@ class TvShowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
+        binding = FragmentTvShowBinding.inflate(
+            layoutInflater, container, false
+        )
         return binding.root
     }
 
@@ -29,9 +33,9 @@ class TvShowFragment : Fragment() {
         if (activity != null) {
             val tvShowAdapter = TvShowAdapter()
 
-            binding.progressSpinKitList.visibility = View.VISIBLE
+            binding.progressSpinKitList.viewVisible()
             viewModel.getTvShow().observe(requireActivity(), { tvShow ->
-                binding.progressSpinKitList.visibility = View.GONE
+                binding.progressSpinKitList.viewGone()
                 tvShowAdapter.apply {
                     setTvShow(tvShow)
                     notifyDataSetChanged()

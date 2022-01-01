@@ -12,8 +12,11 @@
     <dimen name="text_size_xnormal">16sp</dimen>
     <dimen name="text_size_xxnormal">18sp</dimen>
     <dimen name="text_size_header">20sp</dimen>
+    <dimen name="text_size_24sp">24sp</dimen>
 
     <!-- Margin & padding -->
     <dimen name="dimen_6dp">6dp</dimen>
     <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_22dp">22dp</dimen>
 </resources>

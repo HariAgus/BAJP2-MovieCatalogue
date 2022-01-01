@@ -2,10 +2,19 @@ package com.hariagus.submission2bajp.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hariagus.submission2bajp.R
+
+fun View.viewVisible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.viewGone() {
+    this.visibility = View.GONE
+}
 
 fun Context.loadImageGlide(url: String, imageView: ImageView) {
     Glide.with(this)
