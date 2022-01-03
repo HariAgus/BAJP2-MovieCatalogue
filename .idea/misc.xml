@@ -5,12 +5,13 @@
       <map>
         <entry key="app/src/main/res/drawable/fg_card.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.20364583333333333" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.14" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/fragment_movie.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_tv_show.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/item_list.xml" value="0.3057324840764331" />
+        <entry key="app/src/main/res/layout/item_list.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_list_top_rated.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_trending.xml" value="0.20364583333333333" />
       </map>
     </option>
   </component>

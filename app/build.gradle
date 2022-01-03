@@ -15,7 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/discover/\""
+        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
         buildConfigField "String", "API_KEY", "\"1531c71ef3c900e6800b6ebe4b1bf239\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -86,5 +86,7 @@ dependencies {
     // Coin
     implementation "org.koin:koin-android:$coin"
     implementation "org.koin:koin-androidx-viewmodel:$coin"
+
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
 }

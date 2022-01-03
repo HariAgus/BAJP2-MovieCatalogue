@@ -17,8 +17,6 @@
     <string name="popularity">Popularity</string>
     <string name="_198_239">198.239</string>
     <string name="movie_catalogue" translatable="false">Movie Catalogue</string>
-    <string name="colon">:</string>
-    <string name="top_rated">Top Rated</string>
-    <string name="list_movie">List Movie</string>
-    <string name="list_tv_show">List Tv Show</string>
+    <string name="colon" translatable="false">:</string>
+    <string name="trending">Trending</string>
 </resources>

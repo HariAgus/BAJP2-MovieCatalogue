@@ -14,6 +14,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MovieFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieBinding
+
+    private val movieAdapter by lazy { MovieAdapter() }
     private val viewModel: MovieViewModel by viewModel()
 
     override fun onCreateView(
@@ -30,9 +32,12 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (activity != null) {
-            val movieAdapter = MovieAdapter()
+        binding.rvMovie.apply {
+            setHasFixedSize(true)
+            adapter = movieAdapter
+        }
 
+        if (activity != null) {
             binding.progressSpinKitList.viewVisible()
             viewModel.getMovies().observe(requireActivity(), { movies ->
                 binding.progressSpinKitList.viewGone()
@@ -41,11 +46,6 @@ class MovieFragment : Fragment() {
                     notifyDataSetChanged()
                 }
             })
-
-            with(binding.rvMovie) {
-                setHasFixedSize(true)
-                adapter = movieAdapter
-            }
         }
     }
 

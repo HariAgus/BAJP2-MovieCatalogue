@@ -14,6 +14,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class TvShowFragment : Fragment() {
 
     private lateinit var binding: FragmentTvShowBinding
+
+    private val tvShowAdapter by lazy { TvShowAdapter() }
     private val viewModel: TvShowViewModel by viewModel()
 
     override fun onCreateView(
@@ -30,9 +32,12 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (activity != null) {
-            val tvShowAdapter = TvShowAdapter()
+        binding.rvTvShow.apply {
+            setHasFixedSize(true)
+            adapter = tvShowAdapter
+        }
 
+        if (activity != null) {
             binding.progressSpinKitList.viewVisible()
             viewModel.getTvShow().observe(requireActivity(), { tvShow ->
                 binding.progressSpinKitList.viewGone()
@@ -41,11 +46,6 @@ class TvShowFragment : Fragment() {
                     notifyDataSetChanged()
                 }
             })
-
-            with(binding.rvTvShow) {
-                setHasFixedSize(true)
-                adapter = tvShowAdapter
-            }
         }
     }
 

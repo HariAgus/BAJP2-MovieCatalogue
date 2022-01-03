@@ -3,14 +3,40 @@ package com.hariagus.submission2bajp.data.source
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
+import com.hariagus.submission2bajp.data.source.local.entity.TrendingEntity
 import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
 import com.hariagus.submission2bajp.data.source.remote.RemoteDataSource
 import com.hariagus.submission2bajp.data.source.remote.response.MovieItem
+import com.hariagus.submission2bajp.data.source.remote.response.TrendingItem
 import com.hariagus.submission2bajp.data.source.remote.response.TvShowItem
 
 class MovieRepository(
     private val remoteDataSource: RemoteDataSource
 ) : MovieDataSource {
+
+    override fun getTrending(): LiveData<List<TrendingEntity>> {
+        val trendingResult = MutableLiveData<List<TrendingEntity>>()
+        remoteDataSource.getTrending(object : RemoteDataSource.LoadTrendingCallback {
+            override fun onAllTrendingReceived(trendingResponse: List<TrendingItem>?) {
+                val trendingList = ArrayList<TrendingEntity>()
+                if (trendingResponse != null) {
+                    for (trending in trendingResponse) {
+                        with(trending) {
+                            trendingList.add(
+                                TrendingEntity(
+                                    id,
+                                    poster_path,
+                                    title
+                                )
+                            )
+                        }
+                    }
+                }
+                trendingResult.postValue(trendingList)
+            }
+        })
+        return trendingResult
+    }
 
     override fun getAllMovies(): LiveData<List<MovieEntity>> {
         val movieResult = MutableLiveData<List<MovieEntity>>()
