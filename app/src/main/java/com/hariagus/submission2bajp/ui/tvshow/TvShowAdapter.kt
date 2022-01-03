@@ -12,6 +12,7 @@ import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYP
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
 import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
+import com.hariagus.submission2bajp.utils.startActivity
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
@@ -54,11 +55,10 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
             }
 
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                    putExtra(EXTRA_TYPE, TypeCatalogue.TV_SHOW.ordinal)
-                    putExtra(ID_DATA, tvShow.id)
-                }
-                itemView.context.startActivity(intent)
+                itemView.context.startActivity<DetailActivity>(
+                    EXTRA_TYPE to TypeCatalogue.TV_SHOW.ordinal,
+                    ID_DATA to tvShow.id
+                )
             }
         }
 

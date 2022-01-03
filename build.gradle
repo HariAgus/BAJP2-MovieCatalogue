@@ -5,6 +5,7 @@ buildscript {
 
     repositories {
         google()
+        maven { url 'https://www.jitpack.io' }
         jcenter()
     }
     dependencies {
@@ -31,12 +32,14 @@ ext {
     idleResourceVersion = '3.4.0'
     archLifecycleVersion = '2.2.0'
     coin = '2.2.2'
+    bannerViewPager = '3.5.5'
 }
 
 allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://www.jitpack.io' }
     }
 }
 

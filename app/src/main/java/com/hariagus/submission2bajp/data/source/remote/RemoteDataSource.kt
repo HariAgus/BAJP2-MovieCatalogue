@@ -1,10 +1,7 @@
 package com.hariagus.submission2bajp.data.source.remote
 
 import android.util.Log
-import com.hariagus.submission2bajp.data.source.remote.response.MovieItem
-import com.hariagus.submission2bajp.data.source.remote.response.MovieResponse
-import com.hariagus.submission2bajp.data.source.remote.response.TvShowItem
-import com.hariagus.submission2bajp.data.source.remote.response.TvShowResponse
+import com.hariagus.submission2bajp.data.source.remote.response.*
 import com.hariagus.submission2bajp.network.NetworkClient
 import com.hariagus.submission2bajp.utils.EspressoIdlingResource
 import retrofit2.Call
@@ -15,6 +12,25 @@ class RemoteDataSource {
 
     companion object {
         private val TAG: String = RemoteDataSource::class.java.simpleName
+    }
+
+    fun getTrending(callback: LoadTrendingCallback) {
+        EspressoIdlingResource.increment()
+        NetworkClient.getApiService().getTrendingCatalogue()
+            .enqueue(object : Callback<TrendingResponse> {
+                override fun onResponse(
+                    call: Call<TrendingResponse>,
+                    response: Response<TrendingResponse>
+                ) {
+                    callback.onAllTrendingReceived(response.body()?.results)
+                    EspressoIdlingResource.decrement()
+                }
+
+                override fun onFailure(call: Call<TrendingResponse>, t: Throwable) {
+                    Log.e(TAG, "onFailure: ${t.message.toString()}")
+                    EspressoIdlingResource.decrement()
+                }
+            })
     }
 
     fun getMovies(callback: LoadMovieCallback) {
@@ -51,6 +67,10 @@ class RemoteDataSource {
                 EspressoIdlingResource.decrement()
             }
         })
+    }
+
+    interface LoadTrendingCallback {
+        fun onAllTrendingReceived(trendingResponse: List<TrendingItem>?)
     }
 
     interface LoadMovieCallback {
