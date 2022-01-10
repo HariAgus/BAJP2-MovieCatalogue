@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
 import com.hariagus.submission2bajp.databinding.FragmentMovieBinding
 import com.hariagus.submission2bajp.utils.viewGone
 import com.hariagus.submission2bajp.utils.viewVisible
@@ -41,11 +42,27 @@ class MovieFragment : Fragment() {
             binding.progressSpinKitList.viewVisible()
             viewModel.getMovies().observe(requireActivity(), { movies ->
                 binding.progressSpinKitList.viewGone()
-                movieAdapter.apply {
-                    setMovies(movies)
-                    notifyDataSetChanged()
+                if (movies != null) {
+                    showDataMovie(movies)
+                } else {
+                    hideDataMovie()
                 }
             })
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showDataMovie(movies: List<MovieEntity>) {
+        movieAdapter.apply {
+            setMovies(movies)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun hideDataMovie() {
+        binding.apply {
+            lottieEmptyMovie.viewVisible()
+            rvMovie.viewGone()
         }
     }
 

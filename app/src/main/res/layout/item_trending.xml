@@ -31,5 +31,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/sample_title" />
 
-
 </com.google.android.material.card.MaterialCardView>
