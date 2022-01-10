@@ -87,6 +87,7 @@ dependencies {
     implementation "org.koin:koin-android:$coin"
     implementation "org.koin:koin-androidx-viewmodel:$coin"
 
+
     // Image Slider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
