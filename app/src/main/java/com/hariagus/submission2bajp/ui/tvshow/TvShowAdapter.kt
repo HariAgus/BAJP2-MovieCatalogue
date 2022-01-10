@@ -1,8 +1,8 @@
 package com.hariagus.submission2bajp.ui.tvshow
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
@@ -11,19 +11,19 @@ import com.hariagus.submission2bajp.ui.detail.DetailActivity
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYPE
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
 import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
+import com.hariagus.submission2bajp.utils.CatalogueDiffUtil
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
 import com.hariagus.submission2bajp.utils.startActivity
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
-    private val listTvShow = ArrayList<TvShowEntity>()
+    private var listTvShow = emptyList<TvShowEntity>()
 
-    fun setTvShow(tvShow: List<TvShowEntity>?) {
-        if (tvShow == null) return
-        listTvShow.apply {
-            clear()
-            addAll(tvShow)
-        }
+    fun setTvShow(tvShow: List<TvShowEntity>) {
+        val tvShowDiffUtil = CatalogueDiffUtil(listTvShow, tvShow)
+        val diffUtilResult = DiffUtil.calculateDiff(tvShowDiffUtil)
+        listTvShow = tvShow
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(

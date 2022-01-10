@@ -2,6 +2,7 @@ package com.hariagus.submission2bajp.ui.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
@@ -10,19 +11,19 @@ import com.hariagus.submission2bajp.ui.detail.DetailActivity
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYPE
 import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
 import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
+import com.hariagus.submission2bajp.utils.CatalogueDiffUtil
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
 import com.hariagus.submission2bajp.utils.startActivity
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var listMovies = ArrayList<MovieEntity>()
+    private var listMovies = emptyList<MovieEntity>()
 
-    fun setMovies(movies: List<MovieEntity>?) {
-        if (movies == null) return
-        listMovies.apply {
-            clear()
-            addAll(movies)
-        }
+    fun setMovies(movies: List<MovieEntity>) {
+        val movieDiffUtil = CatalogueDiffUtil(listMovies, movies)
+        val diffUtilResult = DiffUtil.calculateDiff(movieDiffUtil)
+        listMovies = movies
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(
