@@ -1,9 +1,12 @@
 package com.hariagus.submission2bajp.ui.home
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -12,6 +15,7 @@ import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.utils.DataDummyMovies
 import com.hariagus.submission2bajp.utils.DataDummyTvShow
 import com.hariagus.submission2bajp.utils.EspressoIdlingResource
+import org.hamcrest.Matcher
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -75,9 +79,37 @@ class HomeActivityTest() {
         onView(withId(R.id.tvOverviewDetail)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun emptyMovies() {
+        onView(withId(R.id.rvMovie)).perform(setVisibility(false))
+        onView(withId(R.id.lottie_empty_movie)).perform(setVisibility(true))
+    }
+
+    @Test
+    fun emptyTvShow() {
+        onView(withId(R.id.rvTvShow)).perform(setVisibility(false))
+        onView(withId(R.id.lottie_empty_tvshow)).perform(setVisibility(true))
+    }
+
     @After
     fun tearDown() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.espressoTestIdlingResource)
+    }
+
+    private fun setVisibility(value: Boolean): ViewAction {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View> {
+                return isAssignableFrom(View::class.java)
+            }
+
+            override fun getDescription(): String {
+                return "Show / Hide View"
+            }
+
+            override fun perform(uiController: UiController?, view: View?) {
+                view?.visibility = if (value) View.VISIBLE else View.GONE
+            }
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
 import com.hariagus.submission2bajp.databinding.FragmentTvShowBinding
 import com.hariagus.submission2bajp.utils.viewGone
 import com.hariagus.submission2bajp.utils.viewVisible
@@ -28,7 +29,6 @@ class TvShowFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,11 +41,27 @@ class TvShowFragment : Fragment() {
             binding.progressSpinKitList.viewVisible()
             viewModel.getTvShow().observe(requireActivity(), { tvShow ->
                 binding.progressSpinKitList.viewGone()
-                tvShowAdapter.apply {
-                    setTvShow(tvShow)
-                    notifyDataSetChanged()
+                if (tvShow != null) {
+                    showDataTvShow(tvShow)
+                } else {
+                    hideDataTvShow()
                 }
             })
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showDataTvShow(tvShow: List<TvShowEntity>) {
+        tvShowAdapter.apply {
+            setTvShow(tvShow)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun hideDataTvShow() {
+        binding.apply {
+            lottieEmptyTvshow.viewVisible()
+            rvTvShow.viewGone()
         }
     }
 
