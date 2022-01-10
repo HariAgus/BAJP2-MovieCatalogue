@@ -7,17 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
 import com.hariagus.submission2bajp.databinding.ItemListBinding
-import com.hariagus.submission2bajp.ui.detail.DetailActivity
-import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYPE
-import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
-import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
 import com.hariagus.submission2bajp.utils.CatalogueDiffUtil
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
-import com.hariagus.submission2bajp.utils.startActivity
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var listMovies = emptyList<MovieEntity>()
+    var onClickItem: ((MovieEntity) -> Unit)? = null
 
     fun setMovies(movies: List<MovieEntity>) {
         val movieDiffUtil = CatalogueDiffUtil(listMovies, movies)
@@ -41,7 +37,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun getItemCount(): Int = listMovies.size
 
-    class MovieViewHolder(private val binding: ItemListBinding) :
+    inner class MovieViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movieEntity: MovieEntity) {
@@ -53,14 +49,14 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     roundedPoster
                 )
             }
+        }
 
-            itemView.setOnClickListener {
-                itemView.context.startActivity<DetailActivity>(
-                    EXTRA_TYPE to TypeCatalogue.MOVIE.ordinal,
-                    ID_DATA to movieEntity.id
-                )
+        init {
+            binding.root.setOnClickListener {
+                onClickItem?.invoke(listMovies[adapterPosition])
             }
         }
 
     }
+
 }

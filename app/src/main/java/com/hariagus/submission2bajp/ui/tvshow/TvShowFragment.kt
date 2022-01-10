@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
 import com.hariagus.submission2bajp.databinding.FragmentTvShowBinding
+import com.hariagus.submission2bajp.ui.detail.DetailActivity
+import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
+import com.hariagus.submission2bajp.utils.startActivity
 import com.hariagus.submission2bajp.utils.viewGone
 import com.hariagus.submission2bajp.utils.viewVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,6 +50,17 @@ class TvShowFragment : Fragment() {
                     hideDataTvShow()
                 }
             })
+        }
+
+        onClick()
+    }
+
+    private fun onClick() {
+        tvShowAdapter.onClickItem = { tvShowEntity ->
+            requireContext().startActivity<DetailActivity>(
+                DetailActivity.EXTRA_TYPE to TypeCatalogue.TV_SHOW.ordinal,
+                DetailActivity.ID_DATA to tvShowEntity.id
+            )
         }
     }
 

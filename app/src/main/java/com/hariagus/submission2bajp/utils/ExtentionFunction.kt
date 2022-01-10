@@ -24,6 +24,7 @@ fun View.viewGone() {
 fun Context.loadImageGlide(url: String, imageView: ImageView) {
     Glide.with(this)
         .load(url)
+        .placeholder(android.R.color.darker_gray)
         .into(imageView)
 }
 

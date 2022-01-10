@@ -7,17 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.data.source.local.entity.TvShowEntity
 import com.hariagus.submission2bajp.databinding.ItemListBinding
-import com.hariagus.submission2bajp.ui.detail.DetailActivity
-import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.EXTRA_TYPE
-import com.hariagus.submission2bajp.ui.detail.DetailActivity.Companion.ID_DATA
-import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
 import com.hariagus.submission2bajp.utils.CatalogueDiffUtil
 import com.hariagus.submission2bajp.utils.loadImageGlideAnim
-import com.hariagus.submission2bajp.utils.startActivity
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     private var listTvShow = emptyList<TvShowEntity>()
+    var onClickItem: ((TvShowEntity) -> Unit)? = null
 
     fun setTvShow(tvShow: List<TvShowEntity>) {
         val tvShowDiffUtil = CatalogueDiffUtil(listTvShow, tvShow)
@@ -53,14 +49,12 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                     roundedPoster
                 )
             }
-
-            itemView.setOnClickListener {
-                itemView.context.startActivity<DetailActivity>(
-                    EXTRA_TYPE to TypeCatalogue.TV_SHOW.ordinal,
-                    ID_DATA to tvShow.id
-                )
-            }
         }
 
+        init {
+            binding.root.setOnClickListener {
+                onClickItem?.invoke(listTvShow[adapterPosition])
+            }
+        }
     }
 }

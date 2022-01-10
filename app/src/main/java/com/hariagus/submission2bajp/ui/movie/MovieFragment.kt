@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hariagus.submission2bajp.data.source.local.entity.MovieEntity
 import com.hariagus.submission2bajp.databinding.FragmentMovieBinding
+import com.hariagus.submission2bajp.ui.detail.DetailActivity
+import com.hariagus.submission2bajp.ui.detail.TypeCatalogue
+import com.hariagus.submission2bajp.utils.startActivity
 import com.hariagus.submission2bajp.utils.viewGone
 import com.hariagus.submission2bajp.utils.viewVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,6 +51,17 @@ class MovieFragment : Fragment() {
                     hideDataMovie()
                 }
             })
+        }
+
+        onClick()
+    }
+
+    private fun onClick() {
+        movieAdapter.onClickItem = { movieEntity ->
+            requireContext().startActivity<DetailActivity>(
+                DetailActivity.EXTRA_TYPE to TypeCatalogue.MOVIE.ordinal,
+                DetailActivity.ID_DATA to movieEntity.id
+            )
         }
     }
 
