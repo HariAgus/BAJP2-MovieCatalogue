@@ -17,7 +17,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
-
 @RunWith(MockitoJUnitRunner::class)
 class TvShowViewModelTest {
 

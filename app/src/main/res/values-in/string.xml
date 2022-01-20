@@ -16,4 +16,6 @@
     <string name="en">En</string>
     <string name="popularity">Popular</string>
     <string name="_198_239">198.239</string>
+    <string name="no_internet">Tidak Ada Koneksi Internet</string>
+    <string name="go_to_setting">Pergi Ke Setelan</string>
 </resources>

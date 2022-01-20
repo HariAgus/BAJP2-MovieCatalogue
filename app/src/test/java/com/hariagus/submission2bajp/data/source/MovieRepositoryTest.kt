@@ -14,7 +14,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.mock
 
-class MovieRepositoryTest {
+class
+MovieRepositoryTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()

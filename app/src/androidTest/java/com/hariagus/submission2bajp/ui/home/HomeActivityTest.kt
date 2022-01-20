@@ -1,16 +1,16 @@
 package com.hariagus.submission2bajp.ui.home
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
+import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
+import com.adevinta.android.barista.interaction.BaristaClickInteractions.clickOn
+import com.adevinta.android.barista.interaction.BaristaListInteractions.clickListItem
 import com.hariagus.submission2bajp.R
 import com.hariagus.submission2bajp.utils.DataDummyMovies
 import com.hariagus.submission2bajp.utils.DataDummyTvShow
@@ -20,11 +20,10 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-
 class HomeActivityTest {
 
-    private val dummyMovies = DataDummyMovies.generateDummyMovies()
-    private val dummyTvShows = DataDummyTvShow.generateDummyTvShow()
+    private var dummyMovies = DataDummyMovies.generateDummyMovies()
+    private var dummyTvShows = DataDummyTvShow.generateDummyTvShow()
 
     @Before
     fun setup() {
@@ -34,61 +33,66 @@ class HomeActivityTest {
 
     @Test
     fun clickChangeLanguage() {
-        onView(withId(R.id.ivChangeLanguage)).perform(click())
+        clickOn(R.id.ivChangeLanguage)
     }
 
     @Test
     fun loadMovies() {
-        onView(withId(R.id.rvMovie)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvMovie)).perform(
-            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.size)
-        )
+        assertDisplayed(R.id.rvMovie)
+        clickListItem(R.id.rvMovie, dummyMovies.size)
     }
 
     @Test
     fun loadDetailMovies() {
-        onView(withId(R.id.rvMovie)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
-        )
-        onView(withId(R.id.posterBg)).check(matches(isDisplayed()))
-        onView(withId(R.id.roundedPosterDetail)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvTitleDetail)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvReleaseDate)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvOverviewDetail)).check(matches(isDisplayed()))
+        clickListItem(R.id.rvMovie, 0)
+        assertDisplayed(R.id.posterBg)
+        assertDisplayed(R.id.roundedPosterDetail)
+        assertDisplayed(R.id.tvTitleDetail)
+        assertDisplayed(R.id.tvReleaseDate)
+        assertDisplayed(R.id.tvOverviewDetail)
+        assertDisplayed(R.id.tvLanguage)
+        assertDisplayed(R.id.tvScoreDetail)
+        assertDisplayed(R.id.tvPopularity)
     }
 
     @Test
     fun loadTvShow() {
-        onView(withText("TV SHOW")).perform(click())
-        onView(withId(R.id.rvTvShow)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvTvShow)).perform(
-            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShows.size)
-        )
+        clickOn("TV SHOW")
+        assertDisplayed(R.id.rvTvShow)
+        clickListItem(R.id.rvTvShow, dummyTvShows.size)
     }
 
     @Test
     fun loadDetailTvShow() {
-        onView(withText("TV SHOW")).perform(click())
-        onView(withId(R.id.rvTvShow)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
-        )
-        onView(withId(R.id.posterBg)).check(matches(isDisplayed()))
-        onView(withId(R.id.roundedPosterDetail)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvTitleDetail)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvReleaseDate)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvOverviewDetail)).check(matches(isDisplayed()))
+        clickOn("TV SHOW")
+        clickListItem(R.id.rvTvShow, 0)
+        assertDisplayed(R.id.posterBg)
+        assertDisplayed(R.id.roundedPosterDetail)
+        assertDisplayed(R.id.tvTitleDetail)
+        assertDisplayed(R.id.tvReleaseDate)
+        assertDisplayed(R.id.tvOverviewDetail)
+        assertDisplayed(R.id.tvLanguage)
+        assertDisplayed(R.id.tvScoreDetail)
+        assertDisplayed(R.id.tvPopularity)
     }
 
     @Test
     fun emptyMovies() {
-        onView(withId(R.id.rvMovie)).perform(setVisibility(false))
-        onView(withId(R.id.lottie_empty_movie)).perform(setVisibility(true))
+        dummyMovies = emptyList()
+        dummyMovies.ifEmpty {
+            onView(withId(R.id.rvMovie)).perform(setVisibility(false))
+            onView(withId(R.id.lottie_empty_movie)).perform(setVisibility(true))
+        }
     }
 
     @Test
     fun emptyTvShow() {
-        onView(withId(R.id.rvTvShow)).perform(setVisibility(false))
-        onView(withId(R.id.lottie_empty_tvshow)).perform(setVisibility(true))
+        onView(withText("TV SHOW")).perform(click())
+        dummyTvShows = emptyList()
+        dummyTvShows.ifEmpty {
+            onView(withId(R.id.rvTvShow)).perform(setVisibility(false))
+            onView(withId(R.id.lottie_empty_tvshow)).perform(setVisibility(true))
+        }
     }
 
     @After

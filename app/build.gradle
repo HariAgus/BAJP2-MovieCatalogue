@@ -80,6 +80,13 @@ dependencies {
     //Idling Resource
     implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
 
+    // Dialog
+    implementation 'com.github.chnouman:AwesomeDialog:1.0.5'
+
+    androidTestImplementation('com.adevinta.android:barista:4.2.0') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
     //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
