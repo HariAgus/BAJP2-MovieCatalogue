@@ -7,7 +7,4 @@ object Const {
     const val URL_MOVIE = "discover/movie"
     const val URL_TV_SHOW = "discover/tv"
 
-    // SPLASH SCREEN
-    const val DELAY_SPLASH_SCREEN = 2000L
-
 }

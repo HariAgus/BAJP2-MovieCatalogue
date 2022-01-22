@@ -32,6 +32,7 @@
                         android:id="@+id/posterBg"
                         android:layout_width="match_parent"
                         android:layout_height="275dp"
+                        android:contentDescription="@string/description"
                         android:scaleType="centerCrop"
                         android:src="@drawable/sample_poster" />
 
